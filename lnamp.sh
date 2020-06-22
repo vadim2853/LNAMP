@@ -1,6 +1,7 @@
 #!/bin/sh
 # server LNMAP
 apt-get update && apt-get upgrade -y
+apt-get install -y wget
 
 # install nginx
 apt-get install -y nginx
@@ -32,7 +33,7 @@ apt-get install -y php-mysql php-mysqli
 
 # install ftp-Server
 apt-get install -y proftpd
-# ftpasswd --passwd --file=/etc/proftpd/ftpd.passwd --name=ftp --uid=33 --gid=33 --home=/var/www --shell=/usr/sbin/nologin
+ftpasswd --passwd --file=/etc/proftpd/ftpd.passwd --name=ftp --uid=33 --gid=33 --home=/var/www --shell=/usr/sbin/nologin
 rm -r /etc/proftpd/proftpd.conf
 cp ./conf/proftpd/proftpd.conf /etc/proftpd/proftpd.conf
 cp ./conf/proftpd/custom.conf /etc/proftpd/conf.d/custom.conf
@@ -40,7 +41,10 @@ cp ./conf/proftpd/custom.conf /etc/proftpd/conf.d/custom.conf
 
 # paste site
 rm -r /var/www/html
-cp -r ./html /var/www/html
+wget https://ru.wordpress.org/latest-ru_RU.tar.gz
+tar -zxvf latest-ru_RU.tar.gz
+cp -r wordpress /var/www/
+mv /var/www/wordpress /var/www/html
 chmod -R 777 /var/www/html
 
 # restart && enabled nginx, apache
