@@ -6,7 +6,7 @@ apt-get update && apt-get upgrade -y
 apt-get install -y nginx
 # replacement of configuration files nginx
 rm -r /etc/nginx/sites-available /etc/nginx/sites-enabled /etc/nginx/nginx.conf
-cp -r ./conf/nginx/conf.d/ /etc/nginx/conf.d/
+cp -r ./conf/nginx/conf.d/ /etc/nginx/
 cp ./conf/nginx/nginx.conf /etc/nginx/nginx.conf
 
 # install apache
