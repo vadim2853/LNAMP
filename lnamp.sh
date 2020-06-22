@@ -25,7 +25,7 @@ a2enmod setenvif
 
 # install mariadb
 apt-get install -y mariadb-server
-#mysqladmin -u root password
+mysqladmin -u root password
 
 # install php-fpm
 apt-get install -y php php-fpm
