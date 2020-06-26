@@ -1,5 +1,15 @@
 #!/bin/sh
 # server LNMAP
+
+# conf BD
+echo задайте имя базы данных
+read db_name
+echo пользователь для базы данных $db_name
+read db_user
+echo задайте пароль для $db_user
+read db_pass
+
+#update system
 apt-get update && apt-get upgrade -y
 apt-get install -y wget
 
@@ -23,9 +33,12 @@ a2enmod mpm_prefork
 a2enmod php7.2
 a2enmod setenvif
 
-# install mariadb
+# install mariadb && create DB
 apt-get install -y mariadb-server
-mysqladmin -u root password
+mysql -u root << EOF
+CREATE DATABASE $db_name DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+GRANT ALL PRIVILEGES ON $db_name.* TO $db_user@localhost IDENTIFIED BY '$db_pass' WITH GRANT OPTION;
+EOF
 
 # install php-fpm
 apt-get install -y php php-fpm
