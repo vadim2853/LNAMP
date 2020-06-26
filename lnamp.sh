@@ -1,13 +1,15 @@
 #!/bin/sh
 # server LNMAP
 
-# conf BD
+# conf install skript
 echo задайте имя базы данных
 read db_name
 echo пользователь для базы данных $db_name
 read db_user
 echo задайте пароль для $db_user
 read db_pass
+echo укажите пользователя фтп
+read ftp_user
 
 #update system
 apt-get update && apt-get upgrade -y
@@ -46,7 +48,7 @@ apt-get install -y php-mysql php-mysqli
 
 # install ftp-Server
 apt-get install -y proftpd
-ftpasswd --passwd --file=/etc/proftpd/ftpd.passwd --name=ftp --uid=33 --gid=33 --home=/var/www --shell=/usr/sbin/nologin
+ftpasswd --passwd --file=/etc/proftpd/ftpd.passwd --name=$ftp_user --uid=33 --gid=33 --home=/var/www --shell=/usr/sbin/nologin
 rm -r /etc/proftpd/proftpd.conf
 cp ./conf/proftpd/proftpd.conf /etc/proftpd/proftpd.conf
 cp ./conf/proftpd/custom.conf /etc/proftpd/conf.d/custom.conf
