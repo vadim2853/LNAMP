@@ -2,13 +2,13 @@
 # server LNMAP
 
 # conf install skript
-echo задайте имя базы данных
+echo select DB name
 read db_name
-echo пользователь для базы данных $db_name
+echo select DB user $db_name
 read db_user
-echo задайте пароль для $db_user
+echo select DB user password $db_user
 read db_pass
-echo укажите пользователя фтп
+echo create ftp-user
 read ftp_user
 
 #update system
